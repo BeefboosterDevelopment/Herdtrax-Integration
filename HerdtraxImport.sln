@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HerdtraxImport", "HerdtraxImport\HerdtraxImport.csproj", "{7B7BE628-A300-4594-B308-DCA28C03E0E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{664667DF-2B02-4961-A36D-638CE4A64AA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HerdtraxImport.UnitTests", "Tests\HerdtraxImport.UnitTests\HerdtraxImport.UnitTests.csproj", "{B53E829E-94A4-4A25-A25C-5748E6DAED27}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B7BE628-A300-4594-B308-DCA28C03E0E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B7BE628-A300-4594-B308-DCA28C03E0E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B7BE628-A300-4594-B308-DCA28C03E0E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B7BE628-A300-4594-B308-DCA28C03E0E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B53E829E-94A4-4A25-A25C-5748E6DAED27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B53E829E-94A4-4A25-A25C-5748E6DAED27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B53E829E-94A4-4A25-A25C-5748E6DAED27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B53E829E-94A4-4A25-A25C-5748E6DAED27}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B53E829E-94A4-4A25-A25C-5748E6DAED27} = {664667DF-2B02-4961-A36D-638CE4A64AA7}
+	EndGlobalSection
+EndGlobal

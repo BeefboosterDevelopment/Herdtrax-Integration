@@ -6,6 +6,10 @@ using System.Linq;
 
 namespace BBDM
 {
+    //ALTER TABLE [dbo].[tblCalf] ADD [HerdtraxAnimalId] int NULL ;
+    //GO
+
+
     public class BBModel : DbContext
     {
         public BBModel()

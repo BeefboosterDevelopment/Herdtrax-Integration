@@ -9,6 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{664667DF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HerdtraxImport.UnitTests", "Tests\HerdtraxImport.UnitTests\HerdtraxImport.UnitTests.csproj", "{B53E829E-94A4-4A25-A25C-5748E6DAED27}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBDM", "BBDM\BBDM.csproj", "{6B80667B-6815-49EB-93DF-403C62F4F5D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHarness", "Tests\TestHarness\TestHarness.csproj", "{1A454005-10D4-4912-956C-53C5A181C8CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,11 +27,20 @@ Global
 		{B53E829E-94A4-4A25-A25C-5748E6DAED27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B53E829E-94A4-4A25-A25C-5748E6DAED27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B53E829E-94A4-4A25-A25C-5748E6DAED27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B80667B-6815-49EB-93DF-403C62F4F5D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B80667B-6815-49EB-93DF-403C62F4F5D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B80667B-6815-49EB-93DF-403C62F4F5D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B80667B-6815-49EB-93DF-403C62F4F5D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A454005-10D4-4912-956C-53C5A181C8CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A454005-10D4-4912-956C-53C5A181C8CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A454005-10D4-4912-956C-53C5A181C8CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A454005-10D4-4912-956C-53C5A181C8CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B53E829E-94A4-4A25-A25C-5748E6DAED27} = {664667DF-2B02-4961-A36D-638CE4A64AA7}
+		{1A454005-10D4-4912-956C-53C5A181C8CE} = {664667DF-2B02-4961-A36D-638CE4A64AA7}
 	EndGlobalSection
 EndGlobal

@@ -12,17 +12,17 @@ namespace HerdtraxImport.Calving
         Info
     }
 
-    public class CalvingValidateRawCalves
+    public class CalvingValidateRawCalves : ICalvingValidateRawCalves
     {
-        private readonly BBModel _model;
+        private readonly BBModel _bbModel;
         private List<string> _issues;
 
-        public CalvingValidateRawCalves(BBModel model)
+        public CalvingValidateRawCalves(BBModel bbModel)
         {
-            _model = model;
+            _bbModel = bbModel;
         }
 
-        public List<string> IssueList
+        private List<string> IssueList
         {
             get { return _issues ?? (_issues = new List<string>()); }
         }
@@ -54,27 +54,22 @@ namespace HerdtraxImport.Calving
             return IssueList;
         }
 
-        private void AddIssue(RawCalf calf, string issueDescription)
-        {
-            AddIssue(calf, issueDescription,IssueSeverity.Fatal);
-           
-        }
-
-        private void AddIssue(RawCalf calf, string issueDescription, IssueSeverity issueSeverity)
+        private void AddIssue(RawCalf calf, string issueDescription, IssueSeverity issueSeverity = IssueSeverity.Fatal)
         {
             switch (issueSeverity)
             {
                 case IssueSeverity.Fatal:
                     IssueList.Add(string.Format("FATAL. Id:{0} - {1}", calf.HerdtraxAnimalId, issueDescription));
-                    break;  
+                    break;
                 case IssueSeverity.Warn:
                     IssueList.Add(string.Format("WARNING. Id:{0} - {1}", calf.HerdtraxAnimalId, issueDescription));
-                    break;  
+                    break;
                 case IssueSeverity.Info:
                     IssueList.Add(string.Format("Id:{0} - {1}", calf.HerdtraxAnimalId, issueDescription));
-                    break;  
+                    break;
             }
         }
+
         private void ValidateCalf(RawCalf rawCalf, Herd herd)
         {
             // Calf Registration # should be null
@@ -94,11 +89,12 @@ namespace HerdtraxImport.Calving
             }
             else
             {
-                tblCalf dbCalf = _model.tblCalves.FirstOrDefault(c => c.HerdtraxAnimalId == rawCalf.HerdtraxAnimalId);
+                tblCalf dbCalf = _bbModel.tblCalves.FirstOrDefault(c => c.HerdtraxAnimalId == rawCalf.HerdtraxAnimalId);
                 if (dbCalf != null)
                     AddIssue(rawCalf,
                         string.Format(
-                            "Animal Id exists in tblCalf. This import progam is not prepared to UPDATE... only INSERTS.  Calf_SN:{0}", dbCalf.Calf_SN));
+                            "Animal Id exists in tblCalf. This import progam is not prepared to UPDATE... only INSERTS.  Calf_SN:{0}",
+                            dbCalf.Calf_SN));
             }
 
             // Sex
@@ -110,7 +106,8 @@ namespace HerdtraxImport.Calving
             if ((rawCalf.SexCode != "F") && (rawCalf.SexCode != "M"))
             {
                 AddIssue(rawCalf,
-                    string.Format("Missing or Invalid Sex Code - {0},  Herdtrax Gender:{1}", rawCalf.SexCode, rawCalf.Gender));
+                    string.Format("Missing or Invalid Sex Code - {0},  Herdtrax Gender:{1}", rawCalf.SexCode,
+                        rawCalf.Gender));
             }
 
             // Date
@@ -141,13 +138,15 @@ namespace HerdtraxImport.Calving
                 }
                 else
                 {
-                    tblCalf dbCalf = _model.tblCalves.FirstOrDefault(
+                    tblCalf dbCalf = _bbModel.tblCalves.FirstOrDefault(
                         c =>
                             c.CalfHerd_SN == herd.HerdSN && c.CalfBirthYr_Num == rawCalf.BirthDate.Year &&
                             c.CalfTag_Num == tagnum);
                     if (dbCalf != null)
                     {
-                        AddIssue(rawCalf, string.Format("Calf exists: HerdSN:{0}  BirthYrNum:{1}  TagNumber{2}.  Calf_SN={3}", herd.HerdSN, rawCalf.BirthDate.Year, rawCalf.TagNumber, dbCalf.Calf_SN));
+                        AddIssue(rawCalf,
+                            string.Format("Calf exists: HerdSN:{0}  BirthYrNum:{1}  TagNumber{2}.  Calf_SN={3}",
+                                herd.HerdSN, rawCalf.BirthDate.Year, rawCalf.TagNumber, dbCalf.Calf_SN));
                     }
                 }
             }
@@ -157,9 +156,9 @@ namespace HerdtraxImport.Calving
         {
             if (rawCalf.DamSN <= 0)
             {
-                AddIssue(rawCalf, string.Format("Dam SN is missing or invalid ({0})", rawCalf.DamSN));
+                AddIssue(rawCalf, string.Format("Dam SN is missing or invalid ({0}) and don't know how to add new cows yet", rawCalf.DamSN));
             }
-            else if (_model.tblDams.Find(rawCalf.DamSN) == null)
+            else if (_bbModel.tblDams.Find(rawCalf.DamSN) == null)
                 AddIssue(rawCalf, string.Format("Dam SN {0} not found.", rawCalf.DamSN));
         }
     }

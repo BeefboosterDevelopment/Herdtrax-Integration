@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBDM", "BBDM\BBDM.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHarness", "Tests\TestHarness\TestHarness.csproj", "{1A454005-10D4-4912-956C-53C5A181C8CE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{99C26B55-CC76-4E68-AED9-ACF307BEEF73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "UI\ConsoleApp\ConsoleApp.csproj", "{9D40CBEF-9933-4BCA-B21C-5D7D197391FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +39,10 @@ Global
 		{1A454005-10D4-4912-956C-53C5A181C8CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A454005-10D4-4912-956C-53C5A181C8CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A454005-10D4-4912-956C-53C5A181C8CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D40CBEF-9933-4BCA-B21C-5D7D197391FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D40CBEF-9933-4BCA-B21C-5D7D197391FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D40CBEF-9933-4BCA-B21C-5D7D197391FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D40CBEF-9933-4BCA-B21C-5D7D197391FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,5 +50,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B53E829E-94A4-4A25-A25C-5748E6DAED27} = {664667DF-2B02-4961-A36D-638CE4A64AA7}
 		{1A454005-10D4-4912-956C-53C5A181C8CE} = {664667DF-2B02-4961-A36D-638CE4A64AA7}
+		{9D40CBEF-9933-4BCA-B21C-5D7D197391FA} = {99C26B55-CC76-4E68-AED9-ACF307BEEF73}
 	EndGlobalSection
 EndGlobal

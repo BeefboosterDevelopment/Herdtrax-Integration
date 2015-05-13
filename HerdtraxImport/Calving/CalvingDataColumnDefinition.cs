@@ -50,6 +50,9 @@ namespace HerdtraxImport.Calving
         public DateTime BirthDate { get; set; }
         public int BirthWt { get; set; }
 
+        public string TwinType { get; set; }
+        public int TwinAnimalId { get; set; }
+
     }
 
 

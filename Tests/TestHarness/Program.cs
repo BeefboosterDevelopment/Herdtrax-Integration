@@ -37,9 +37,9 @@ namespace TestHarness
 
             var bbModel = new BBModel();
 
-            // Eliminate some calves
-            var calvingDoNotImport = new CalvingDoNoImport();
-            calvingDoNotImport.DoNotImport(listOfRawCalves);
+ /*           // Eliminate some calves
+            var calvingDoNotImport = new CalvingDoNotImport();
+            calvingDoNotImport.DoNotImport(listOfRawCalves);*/
 
 
             // Herd Assignment
@@ -49,7 +49,7 @@ namespace TestHarness
 
             // Gender => Sex_Code
             var calvingSexCodeAssignment = new CalvingSexCodeAssignment();
-            CalvingSexCodeAssignment.SetSexCode(herds);
+            calvingSexCodeAssignment.SetSexCode(herds);
 
 
             // Validate
@@ -69,8 +69,8 @@ namespace TestHarness
 
                 // Write the calves
                
-                var writer = new CalvingImportRawCalves(bbModel);
-                var totalImportCount = writer.Import(herds);
+                var writer = new WriteToDatababase(bbModel);
+                var totalImportCount = writer.WriteCalfData(herds);
 
                 Console.WriteLine("\nNUMBER OF CALVES IMPORTED:{0}",totalImportCount);
     

@@ -2,9 +2,9 @@
 
 namespace HerdtraxImport.Calving
 {
-    public class CalvingSexCodeAssignment
+    public class CalvingSexCodeAssignment : ICalvingSexCodeAssignment
     {
-        public static void SetSexCode(IEnumerable<Herd> herds)
+        public void SetSexCode(IEnumerable<Herd> herds)
         {
             foreach (var herd in herds)
             {

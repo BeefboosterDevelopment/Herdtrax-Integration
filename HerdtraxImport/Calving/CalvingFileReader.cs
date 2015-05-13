@@ -34,10 +34,8 @@ namespace HerdtraxImport.Calving
             return new List<CalvingDataColumnDefinition>
             {
                 // hardcode a subset ... theres more.....
-                new CalvingDataColumnDefinition(CalvingColumn.ManagementGroup, 16),
                 new CalvingDataColumnDefinition(CalvingColumn.CalfHerdtraxId, 0),
                 new CalvingDataColumnDefinition(CalvingColumn.CalfVID, 1),
-                new CalvingDataColumnDefinition(CalvingColumn.DamRegId, 19),
                 new CalvingDataColumnDefinition(CalvingColumn.CalfRegId, 2),
                 new CalvingDataColumnDefinition(CalvingColumn.BirthWeight, 3),
                 new CalvingDataColumnDefinition(CalvingColumn.CalfCCIA, 4),
@@ -50,8 +48,10 @@ namespace HerdtraxImport.Calving
                 new CalvingDataColumnDefinition(CalvingColumn.Twins, 12),
                 new CalvingDataColumnDefinition(CalvingColumn.Hoof, 13),
                 new CalvingDataColumnDefinition(CalvingColumn.Udder, 14),
-                new CalvingDataColumnDefinition(CalvingColumn.DamTagLetter, 17),
-                new CalvingDataColumnDefinition(CalvingColumn.DamTagNumber, 18),
+                new CalvingDataColumnDefinition(CalvingColumn.ManagementGroup, 15),
+                new CalvingDataColumnDefinition(CalvingColumn.DamTagLetter, 16),
+                new CalvingDataColumnDefinition(CalvingColumn.DamTagNumber, 17),
+                new CalvingDataColumnDefinition(CalvingColumn.DamRegId, 18),
             };
         }
 
@@ -119,6 +119,7 @@ namespace HerdtraxImport.Calving
                         calf.TagLetter = colvals[coldef.Index];
                         break;
                     case CalvingColumn.Twins:
+                        calf.TwinType = colvals[coldef.Index];
                         break;
                 }
             }

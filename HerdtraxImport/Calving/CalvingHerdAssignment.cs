@@ -4,7 +4,7 @@ using BBDM;
 
 namespace HerdtraxImport.Calving
 {
-    public class CalvingHerdAssignment
+    public class CalvingHerdAssignment : ICalvingHerdAssignment
     {
         private readonly BBModel _model;
         private List<Herd> _herds;

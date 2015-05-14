@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
 namespace HerdtraxImport.Calving
 {
     public class CalvingDataColumnDefinition
@@ -33,11 +32,12 @@ namespace HerdtraxImport.Calving
         public string SexCode { get; set; }
         public bool DoNotImport { get; set; }
         public string NotImportedReason { get; set; }
-  
+
         public string DamRegistrationNumber { get; set; }
         public string DamVID { get; set; }
-        public string DamTagLetter { get; set; }
         public string DamTagNumber { get; set; }
+        public string DamTagLetter { get; set; }
+        public string DamTagColor { get; set; }
 
         public string RegistrationNumber { get; set; }
         public string CCIA { get; set; }
@@ -45,15 +45,21 @@ namespace HerdtraxImport.Calving
         public string Group { get; set; }
         public string Gender { get; set; }
 
-        public string TagLetter { get; set; }
         public string TagNumber { get; set; }
+        public string TagLetter { get; set; }
+        public string TagColor { get; set; }
+        public string DNATag { get; set; }
         public DateTime BirthDate { get; set; }
         public int BirthWt { get; set; }
+        public int EaseScore { get; set; }
+        public int HoofScore { get; set; }
+        public int UdderScore { get; set; }
 
         public string TwinType { get; set; }
-        public int TwinAnimalId { get; set; }
-
+        public string SurrogateTagNumber { get; set; }
+        public string SurrogateTagLetter { get; set; }
+        public string SurrogateTagColor { get; set; }
+        public int SurrogateDam_SN { get; set; }
+        public int SiblingCalfAnimalId { get; set; }
     }
-
-
 }

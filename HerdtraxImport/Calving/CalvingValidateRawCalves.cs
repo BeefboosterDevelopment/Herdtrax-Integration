@@ -93,7 +93,7 @@ namespace HerdtraxImport.Calving
                 if (dbCalf != null)
                     AddIssue(rawCalf,
                         string.Format(
-                            "Animal Id exists in tblCalf. This import progam is not prepared to UPDATE... only INSERTS.  Calf_SN:{0}",
+                            "Animal Id already exists. This import progam is not prepared to UPDATE... only INSERTS.  Calf_SN:{0}",
                             dbCalf.Calf_SN));
             }
 
@@ -106,7 +106,7 @@ namespace HerdtraxImport.Calving
             if ((rawCalf.SexCode != "F") && (rawCalf.SexCode != "M"))
             {
                 AddIssue(rawCalf,
-                    string.Format("Missing or Invalid Sex Code - {0},  Herdtrax Gender:{1}", rawCalf.SexCode,
+                    string.Format("Missing or invalid sex code - {0},  Herdtrax Gender:{1}", rawCalf.SexCode,
                         rawCalf.Gender));
             }
 
@@ -122,10 +122,19 @@ namespace HerdtraxImport.Calving
                 AddIssue(rawCalf, string.Format("Birth weight is out of range ({0})", rawCalf.BirthWt));
             }
 
+            // Ease (we have true/false for assisted birth flag)
+            if ((rawCalf.EaseScore < 0) || (rawCalf.EaseScore > 1))
+            {
+                AddIssue(rawCalf, string.Format("Calving ease is out of range ({0})", rawCalf.EaseScore));
+            }
+
+            // Udder
+            if ((rawCalf.UdderScore < 0) || (rawCalf.UdderScore > 4))
+            {
+                AddIssue(rawCalf, string.Format("Udder score is out of range ({0})", rawCalf.UdderScore));
+            }
 
             // Tag
-
-
             if (string.IsNullOrWhiteSpace(rawCalf.TagNumber))
             {
                 AddIssue(rawCalf, string.Format("Calf tag number is null or missing"));
@@ -135,6 +144,7 @@ namespace HerdtraxImport.Calving
                 int tagnum;
                 if (!int.TryParse(rawCalf.TagNumber, out tagnum))
                 {
+                    AddIssue(rawCalf, string.Format("Calf tag number is not a real number {0}.", rawCalf.TagNumber));
                 }
                 else
                 {
@@ -150,13 +160,38 @@ namespace HerdtraxImport.Calving
                     }
                 }
             }
+
+            // DNA tag
+            if (!string.IsNullOrEmpty(rawCalf.DNATag))
+            {
+                int dnatag;
+                if (!int.TryParse(rawCalf.DNATag, out dnatag))
+                {
+                    AddIssue(rawCalf, string.Format("Calf DNA tag is not numeric {0}.", rawCalf.DNATag));
+                }
+                else
+                {
+                    tblCalf dbCalf = _bbModel.tblCalves.FirstOrDefault(
+                        c => c.DNA_Tag == dnatag);
+                    if (dbCalf != null)
+                    {
+                        AddIssue(rawCalf,
+                            string.Format(
+                                "DNA tag {0} already exists: HerdSN:{1}  BirthYrNum:{2}  TagNumber{3}.  Calf_SN={4}",
+                                dnatag,
+                                herd.HerdSN, rawCalf.BirthDate.Year, rawCalf.TagNumber, dbCalf.Calf_SN));
+                    }
+                }
+            }
         }
 
         private void ValidateDam(RawCalf rawCalf)
         {
             if (rawCalf.DamSN <= 0)
             {
-                AddIssue(rawCalf, string.Format("Dam SN is missing or invalid ({0}) and don't know how to add new cows yet", rawCalf.DamSN));
+                AddIssue(rawCalf,
+                    string.Format("Dam SN is missing or invalid ({0}) and don't know how to add new cows yet",
+                        rawCalf.DamSN));
             }
             else if (_bbModel.tblDams.Find(rawCalf.DamSN) == null)
                 AddIssue(rawCalf, string.Format("Dam SN {0} not found.", rawCalf.DamSN));

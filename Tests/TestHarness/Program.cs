@@ -68,8 +68,8 @@ namespace TestHarness
             {
 
                 // Write the calves
-               
-                var writer = new WriteToDatababase(bbModel);
+                var bldr = new CalvingCalfBuilder();
+                var writer = new WriteToDatababase(bbModel,bldr);
                 var totalImportCount = writer.WriteCalfData(herds);
 
                 Console.WriteLine("\nNUMBER OF CALVES IMPORTED:{0}",totalImportCount);

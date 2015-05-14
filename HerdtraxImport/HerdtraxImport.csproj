@@ -42,9 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calving\CalvingCalfBuilder.cs" />
     <Compile Include="Calving\CalvingColumns.cs" />
     <Compile Include="Calving\CalvingDataColumnDefinition.cs" />
     <Compile Include="Calving\CalvingHerdAssignment.cs" />
+    <Compile Include="Calving\CalvingTwinProcessing.cs" />
+    <Compile Include="Calving\ICalvingCalfBuilder.cs" />
+    <Compile Include="Calving\ICalvingTwinProcessing.cs" />
     <Compile Include="Calving\WriteToDatababase.cs" />
     <Compile Include="Calving\CalvingSexCodeAssignment.cs" />
     <Compile Include="Calving\CalvingValidateRawCalves.cs" />

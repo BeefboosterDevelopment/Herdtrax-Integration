@@ -19,9 +19,11 @@ namespace ConsoleApp
             kernel.Bind<IProcessRawCalves>().To<ProcessRawCalves>();
             kernel.Bind<BBModel>().ToSelf().InSingletonScope();
             kernel.Bind<ICalvingSexCodeAssignment>().To<CalvingSexCodeAssignment>();
+            kernel.Bind<ICalvingTwinProcessing>().To<CalvingTwinProcessing>();
             kernel.Bind<ICalvingValidateRawCalves>().To<CalvingValidateRawCalves>();
             kernel.Bind<IImportCalving>().To<ImportCalving>();
             kernel.Bind<IWriteToDatababase>().To<WriteToDatababase>();
+            kernel.Bind<ICalvingCalfBuilder>().To<CalvingCalfBuilder>();
 
             int idxFile = Array.IndexOf(args, "-f");
             if (idxFile == -1)

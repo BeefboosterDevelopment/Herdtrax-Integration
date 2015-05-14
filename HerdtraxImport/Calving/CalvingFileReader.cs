@@ -49,9 +49,17 @@ namespace HerdtraxImport.Calving
                 new CalvingDataColumnDefinition(CalvingColumn.Hoof, 13),
                 new CalvingDataColumnDefinition(CalvingColumn.Udder, 14),
                 new CalvingDataColumnDefinition(CalvingColumn.ManagementGroup, 15),
-                new CalvingDataColumnDefinition(CalvingColumn.DamTagLetter, 16),
                 new CalvingDataColumnDefinition(CalvingColumn.DamTagNumber, 17),
+                new CalvingDataColumnDefinition(CalvingColumn.DamTagLetter, 16),
+                new CalvingDataColumnDefinition(CalvingColumn.DamTagColor, 24),
                 new CalvingDataColumnDefinition(CalvingColumn.DamRegId, 18),
+                new CalvingDataColumnDefinition(CalvingColumn.CalfDNA, 19),
+                new CalvingDataColumnDefinition(CalvingColumn.Ease, 20),
+                new CalvingDataColumnDefinition(CalvingColumn.SurrogateTagNumber, 21),
+                new CalvingDataColumnDefinition(CalvingColumn.SurrogateTagLetter, 22),
+                new CalvingDataColumnDefinition(CalvingColumn.SurrogateTagColor, 23),
+                new CalvingDataColumnDefinition(CalvingColumn.TagLetter, 25),
+
             };
         }
 
@@ -79,11 +87,14 @@ namespace HerdtraxImport.Calving
                     case CalvingColumn.DamVID:
                         calf.DamVID = colvals[coldef.Index];
                         break;
+                    case CalvingColumn.DamTagNumber:
+                        calf.DamTagNumber = colvals[coldef.Index];
+                        break;
                     case CalvingColumn.DamTagLetter:
                         calf.DamTagLetter = colvals[coldef.Index];
                         break;
-                    case CalvingColumn.DamTagNumber:
-                        calf.DamTagNumber = colvals[coldef.Index];
+                    case CalvingColumn.DamTagColor:
+                        calf.DamTagColor = colvals[coldef.Index];
                         break;
                     case CalvingColumn.CalfRegId:
                         calf.RegistrationNumber = colvals[coldef.Index];
@@ -101,8 +112,13 @@ namespace HerdtraxImport.Calving
                         calf.Gender = colvals[coldef.Index];
                         break;
                     case CalvingColumn.Hoof:
+                        calf.HoofScore = ConvertInt(colvals[coldef.Index]);
                         break;
                     case CalvingColumn.Udder:
+                        calf.UdderScore = ConvertInt(colvals[coldef.Index]);
+                        break;
+                    case CalvingColumn.Ease:
+                        calf.EaseScore = ConvertInt(colvals[coldef.Index]);
                         break;
                     case CalvingColumn.BirthWeight:
                         calf.BirthWt = ConvertInt(colvals[coldef.Index]);
@@ -113,13 +129,26 @@ namespace HerdtraxImport.Calving
                     case CalvingColumn.TagNumber:
                         calf.TagNumber = colvals[coldef.Index];
                         break;
-                    case CalvingColumn.TagColor:
-                        break;
                     case CalvingColumn.TagLetter:
                         calf.TagLetter = colvals[coldef.Index];
                         break;
+                    case CalvingColumn.TagColor:
+                        calf.TagColor = colvals[coldef.Index];
+                        break;
                     case CalvingColumn.Twins:
                         calf.TwinType = colvals[coldef.Index];
+                        break;
+                    case CalvingColumn.CalfDNA:
+                        calf.DNATag = colvals[coldef.Index];
+                        break;
+                    case CalvingColumn.SurrogateTagNumber:
+                        calf.SurrogateTagNumber = colvals[coldef.Index];
+                        break;
+                    case CalvingColumn.SurrogateTagLetter:
+                        calf.SurrogateTagLetter = colvals[coldef.Index];
+                        break;
+                    case CalvingColumn.SurrogateTagColor:
+                        calf.SurrogateTagColor = colvals[coldef.Index];
                         break;
                 }
             }

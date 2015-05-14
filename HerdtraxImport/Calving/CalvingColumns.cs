@@ -8,21 +8,27 @@
         DamHerdtraxId,
         DamCCIA,
         DamVID,
-        DamTagLetter,
         DamTagNumber,
+        DamTagLetter,
+        DamTagColor,
         CalfRegId,
         CalfHerdtraxId,
         CalfVID,
         CalfCCIA,
+        CalfDNA,
         Gender,
         Hoof,
         Udder,
+        Ease,
         BirthWeight,
         BirthDate,
         TagNumber,
-        TagColor,
         TagLetter,
-        Twins
+        TagColor,
+        Twins,
+        SurrogateTagNumber,
+        SurrogateTagLetter,
+        SurrogateTagColor
     }
 
 }

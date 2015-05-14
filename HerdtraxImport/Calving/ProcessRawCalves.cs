@@ -7,21 +7,23 @@ namespace HerdtraxImport.Calving
     public class ProcessRawCalves : IProcessRawCalves
     {
         private readonly BBModel _bbModel;
-        private readonly ICalvingHerdAssignment _calvingHerdAssignment;
-        private readonly ICalvingSexCodeAssignment _calvingSexCodeAssignment;
-        public ProcessRawCalves(BBModel bbModel, ICalvingHerdAssignment calvingHerdAssignment, ICalvingSexCodeAssignment calvingSexCode)
+        private readonly ICalvingHerdAssignment _herdAssignment;
+        private readonly ICalvingSexCodeAssignment _sexCodeAssignment;
+        private readonly ICalvingTwinProcessing _twinProcessing;
+        public ProcessRawCalves(BBModel bbModel, ICalvingHerdAssignment herdAssignment, ICalvingSexCodeAssignment sexCode, ICalvingTwinProcessing twinProcessing)
         {
             _bbModel = bbModel;
-            _calvingHerdAssignment = calvingHerdAssignment;
-            _calvingSexCodeAssignment = calvingSexCode;
+            _herdAssignment = herdAssignment;
+            _sexCodeAssignment = sexCode;
+            _twinProcessing = twinProcessing;
         }
 
         public List<Herd> SortCalvesIntoBeefboosterHerds(List<RawCalf> listOfRawCalves)
         {
-            // Eliminate some calves - those that are not in breeding herds
+            // Eliminate calves that are not in breeding herds
             foreach (var rawCalf in listOfRawCalves)
             {
-                //TODO: Config the 'non' breeder groups - for AB th
+                //TODO: Config the 'non' breeder groups - for AB
                 if (rawCalf.Group == "Yard Cows")
                 {
                     rawCalf.DoNotImport = true;
@@ -31,10 +33,13 @@ namespace HerdtraxImport.Calving
             }
 
             // Herd Assignment
-            IEnumerable<Herd> herds = _calvingHerdAssignment.GroupByHerd(listOfRawCalves);
+            IEnumerable<Herd> herds = _herdAssignment.GroupByHerd(listOfRawCalves);
 
             // Gender => Sex_Code
-            _calvingSexCodeAssignment.SetSexCode(herds);
+            _sexCodeAssignment.SetSexCode(herds);
+
+            // Graft, Sibling
+            _twinProcessing.Process(herds);
 
             return herds.ToList();
         }

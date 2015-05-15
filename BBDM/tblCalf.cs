@@ -48,6 +48,7 @@ namespace BBDM
 
         public bool Cull_WeanWt_Flag { get; set; }
 
+/*
         public bool? zzBit3_Flag { get; set; }
 
         public bool? zzBit4_Flag { get; set; }
@@ -59,6 +60,7 @@ namespace BBDM
         public bool? zzBit7_Flag { get; set; }
 
         public bool? zzBit8_Flag { get; set; }
+*/
 
         public int? GraftedFromDam_SN { get; set; }
 
@@ -68,20 +70,25 @@ namespace BBDM
 
         public DateTime? Birth_Date { get; set; }
 
+/*
         public short? zzDaysFromMedianBirthDate_Num { get; set; }
+*/
 
         public short? Birth_Wt { get; set; }
 
+/*
         public short? zzBirthAdj_Wt { get; set; }
 
         public float? zzBirthAdjWt_Idx { get; set; }
 
         public short? zzBirthAdjWt_Rnk { get; set; }
+*/
 
         public DateTime? Wean_Date { get; set; }
 
         public short? Wean_Wt { get; set; }
 
+/*
         public short? zzDay180_Wt { get; set; }
 
         public float? zzDay180Wt_Idx { get; set; }
@@ -117,16 +124,21 @@ namespace BBDM
         public double? zzPreTest_Idx { get; set; }
 
         public short? zzPreTest_Rnk { get; set; }
+*/
 
+/*
         [Column(TypeName = "text")]
         public string Comment_Txt { get; set; }
+*/
 
         [StringLength(10)]
         public string Sire_Str { get; set; }
 
+/*
         public float? zzYlgHeiferSel_Idx { get; set; }
 
         public short? zzYlgHeiferSel_Rnk { get; set; }
+*/
 
         public byte? Teat_Score { get; set; }
 
@@ -139,6 +151,9 @@ namespace BBDM
         public bool Polled_Flag { get; set; }
         
         public int? HerdtraxAnimalId { get; set; }
+        
+        [StringLength(10)]
+        public string HerdtraxTwinType { get; set; }
 
         public virtual tblDam tblDam { get; set; }
 

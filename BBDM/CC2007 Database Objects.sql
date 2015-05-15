@@ -1,5 +1,8 @@
 
 ALTER TABLE [dbo].[tblCalf] ADD [HerdtraxAnimalId] int NULL ;
+ALTER TABLE [dbo].[tblCalf] ADD [HerdtraxTwinType] varchar(10) NULL;
+--ALTER TABLE [dbo].[tblCalf] ADD [HerdtraxAccount] varchar(10) NULL;
+
 GO
 
 

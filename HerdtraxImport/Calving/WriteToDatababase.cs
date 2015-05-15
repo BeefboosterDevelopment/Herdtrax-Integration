@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
 using BBDM;
 
@@ -19,43 +17,34 @@ namespace HerdtraxImport.Calving
 
         public int WriteCalfData(IEnumerable<Herd> herds)
         {
-            int nRowsChanged = 0;
-            DbContextTransaction transaction = _model.Database.BeginTransaction();
+            List<Herd> herdList = herds.ToList();
+            AssignCalfSN(herdList);
 
-/*
-            int numberOfNewCalfSerialNumbersNeeded = herds.Calves.Count(c => c.CalfSN == 0);
-            int lastSN = _model.ReserveSNRange(numberOfNewCalfSerialNumbersNeeded);
-            int nextSN = lastSN - numberOfNewCalfSerialNumbersNeeded + 1;
-*/
-
-            // assign the calf sn's
-
-
-            try
+            
+            foreach (Herd herd in herdList)
             {
-                foreach (Herd herd in herds)
-                    ImportHerd(herd);
-                nRowsChanged = _model.SaveChanges();
-                transaction.Commit();
+                foreach (RawCalf rawCalf in herd.Calves.Where(c => !c.DoNotImport).ToList())
+                {
+                    _model.tblCalves.Add(_calfBuilder.BuildFromRawCalf(rawCalf, herd));
+                }
             }
-            catch (Exception)
-            {
-                transaction.Rollback();
-                //throw;
-            }
-            return nRowsChanged;
+            return _model.SaveChanges();
         }
 
-
-        private void ImportHerd(Herd herd)
+        private void AssignCalfSN(List<Herd> herdList)
         {
-            List<RawCalf> calvesToImport = herd.Calves.Where(c => !c.DoNotImport).ToList();
-            foreach (RawCalf rawCalf in calvesToImport)
+            int numCalves = herdList.Sum(h => h.Calves.Count(c => !c.DoNotImport));
+            int startingSN = _model.ReserveSNRange(numCalves);
+            foreach (Herd herd in herdList)
+                foreach (RawCalf c in herd.Calves.Where(c => !c.DoNotImport))
+                {
+                    c.CalfSN = startingSN++;
+                }
+            //return --startingSN;
+/*            foreach (Herd herd in herdList)
             {
-                tblCalf newCalf = _calfBuilder.BuildFromRawCalf(rawCalf, herd);
-                _model.tblCalves.Add(newCalf);
-            }
-            ;
+                var l = herd.Calves.Where(h => h.CalfSN==0);
+            }*/
         }
     }
 }

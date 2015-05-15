@@ -40,8 +40,6 @@ namespace ConsoleApp
                 Console.WriteLine("Usage:   ConsoleApp -f filename.csv     -a account Id");
             }
 */
-
-
             string filename = args[idxFile + 1];
             if (!File.Exists(filename))
                 Console.WriteLine("File not found:{0}", filename);
@@ -58,7 +56,6 @@ namespace ConsoleApp
                     ListIssues(importer.Issues);
                 }
             }
-
 
             Console.Write("Press enter to quit");
             Console.ReadLine();

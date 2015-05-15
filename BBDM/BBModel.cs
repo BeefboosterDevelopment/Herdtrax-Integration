@@ -6,10 +6,6 @@ using System.Linq;
 
 namespace BBDM
 {
-    //ALTER TABLE [dbo].[tblCalf] ADD [HerdtraxAnimalId] int NULL ;
-    //GO
-
-
     public class BBModel : DbContext
     {
         public BBModel()
@@ -36,9 +32,10 @@ namespace BBDM
                 .IsFixedLength()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tblCalf>()
+/*            modelBuilder.Entity<tblCalf>()
                 .Property(e => e.Comment_Txt)
                 .IsUnicode(false);
+ */
 
             modelBuilder.Entity<tblCalf>()
                 .Property(e => e.Sire_Str)
@@ -133,6 +130,7 @@ namespace BBDM
             return SN.First().Last_SN;
         }
 
+        // return the first available SN in the reserved range
         public int ReserveSNRange(int numberToReserve)
         {
             //const string sql = @"UPDATE [stblSN] SET [Last_SN] = [Last_SN] + @num";
@@ -154,7 +152,10 @@ namespace BBDM
 
             Database.ExecuteSqlCommand("EXEC ReserveSN @numToReserve, @lastSN OUTPUT",
                 new SqlParameter("@numToReserve", numberToReserve), lastSNReservedParam);
-            return Convert.ToInt32(lastSNReservedParam.Value);
+
+
+            var newLastSN = Convert.ToInt32(lastSNReservedParam.Value);
+            return newLastSN - numberToReserve + 1;
         }
     }
 }

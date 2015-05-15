@@ -10,7 +10,7 @@ namespace HerdtraxImport.Calving
         private readonly ICalvingHerdAssignment _herdAssignment;
         private readonly ICalvingSexCodeAssignment _sexCodeAssignment;
         private readonly ICalvingTwinProcessing _twinProcessing;
-        public ProcessRawCalves(BBModel bbModel, ICalvingHerdAssignment herdAssignment, ICalvingSexCodeAssignment sexCode, ICalvingTwinProcessing twinProcessing)
+         public ProcessRawCalves(BBModel bbModel, ICalvingHerdAssignment herdAssignment, ICalvingSexCodeAssignment sexCode, ICalvingTwinProcessing twinProcessing)
         {
             _bbModel = bbModel;
             _herdAssignment = herdAssignment;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace HerdtraxImport.Calving
 {
@@ -29,6 +30,15 @@ namespace HerdtraxImport.Calving
 
             for (idx = 1; idx < allLines.Length; idx++)
                 allCalves.Add(_calvingFileReader.MakeRawCalf(coldefs, allLines[idx].Split(',')));
+
+
+
+    // ***********************************************
+    // take care of on weird VX dam sn (DamReg is 229282543 ... belongs to calf with Animal Id:344638)
+    var c1 = allCalves.First(ac => ac.HerdtraxAnimalId == 344638);
+    c1.DamSN = 1321659;
+
+
 
             return allCalves;
         }

@@ -17,26 +17,26 @@ namespace HerdtraxImport.Calving
         {
             foreach (Herd herd in herds)
             {
-                List<RawCalf> twins = herd.Calves.Where(calf => !string.IsNullOrEmpty(calf.SurrogateTagNumber)).ToList();
-                
+                List<RawCalf> twinCalfList = herd.Calves.Where(calf => !string.IsNullOrEmpty(calf.TwinType)).ToList();
+ 
                 // Set sibling 
-                foreach (RawCalf calf in twins)
+                foreach (RawCalf calf in twinCalfList)
                 {
-                    var tc = calf;
+                    RawCalf tc = calf;
 
                     // Sibling is calf with same mother and different animal id
-                    var sibling =
+                    RawCalf sibling =
                         herd.Calves.FirstOrDefault(c => c.HerdtraxAnimalId != tc.HerdtraxAnimalId && c.DamSN == tc.DamSN);
                     if (sibling != null)
                     {
                         calf.SiblingCalfAnimalId = sibling.HerdtraxAnimalId;
-                        sibling.SiblingCalfAnimalId = calf.HerdtraxAnimalId;
+                        //sibling.SiblingCalfAnimalId = calf.HerdtraxAnimalId;
                     }
                 }
 
 
                 // Set Surrogate mother 
-                foreach (RawCalf calf in twins)
+                foreach (RawCalf calf in twinCalfList)
                 {
                     int herdSN = herd.HerdSN;
                     RawCalf gc = calf;

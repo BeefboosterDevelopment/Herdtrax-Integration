@@ -193,8 +193,11 @@ namespace HerdtraxImport.Calving
                     string.Format("Dam SN is missing or invalid ({0}) and don't know how to add new cows yet",
                         rawCalf.DamSN));
             }
-            else if (_bbModel.tblDams.Find(rawCalf.DamSN) == null)
-                AddIssue(rawCalf, string.Format("Dam SN {0} not found.", rawCalf.DamSN));
+            else
+            {
+                if (_bbModel.tblDams.Find(rawCalf.DamSN) == null)
+                    AddIssue(rawCalf, string.Format("Dam SN {0} not found.", rawCalf.DamSN));
+            }
         }
     }
 }
